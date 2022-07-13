@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Digital Form</title>
+  <script>
+    $(document).ready(function() {
+
+  $("#account-select").change(function() {
+    $("#show-address").show('slide');
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+  $("#show-address").click(function(){
+    $("#address-history").show('slide');
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+  $("#yes").click(function(){
+    $("#current-address").show('slide');
+    $("#non-uk").hide();
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+  $("#no").click(function(){
+    $("#non-uk").show('slide');
+    $("#current-address").hide();
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+  $("#yes-prev").click(function(){
+    $("#previous-address").show('slide');
+    $("#get-consent").show('slide');
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+   $("#no-prev").click(function(){
+    $("#get-consent").show('slide');
+    $("#previous-address").hide();
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+  $("#get-consent").click(function(){
+    $("#your-consent").show('slide');
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+  $("#credit-click").click(function() {
+    $("#info-request").show('slide');
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+  $("#info-click").click(function() {
+    $("#submit-app").show('slide');
+    window.scrollTo(0,document.body.scrollHeight);
+  });
+
+  $('#app-form').on('submit', function(){
+    var arr = $(this).serializeArray();
+    console.log(arr);
+    return false;
+});
+});
+  </script>
+</head>
+<style>
+  body {
+  font-family: helvetica, sans-serif;
+}
+
+fieldset {
+  min-height: 200px;
+}
+
+.standard-label, .standard-input {
+    display: block;
+}
+
+.standard-label {
+  margin-bottom: 20px;
+}
+
+.standard-input, .standard-select {
+  margin-top: 10px;
+  border: 3px lightsteelblue solid;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.standard-input {
+  height: 25px;
+  width: 250px;
+  font-size: 1em;
+}
+
+.standard-select {
+  height: 32px;
+  width: 150px;
+  font-size: 1em;
+}
+
+#account-select {
+  width: 260px;
+}
+
+.container {
+  width: 70%;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px black solid;
+  padding: 10px;
+  background-color: lightsteelblue;
+}
+
+.sub-container {
+  padding-left: 10px;
+  background-color: white;
+  margin: 10px auto;
+}
+
+.required {
+  font-size: 1.5em;
+  color: red;
+}
+
+.small-heading {
+  font-size: 18px;
+}
+
+.radio-label {
+  font-size: 20px;
+  margin: 0 40px;
+}
+
+.radio-input {
+  margin-bottom: 25px;
+}
+
+button {
+  border: 2px black solid;
+  background-color: lightsteelblue;
+  border-radius: 5px;
+  margin: 0 auto;
+  height: 35px;
+  width: 150px;
+  font-size: 20px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+    width: 20px;
+    height: 20px;
+    border-width: thin;
+}
+
+#show-address {
+  display: none;
+  float: right;
+}
+
+#address-history {
+  display: none;
+}
+
+#non-uk {
+  display: none;
+  text-align: center;
+  font-size: 25px;
+  color: red;
+}
+
+#current-address {
+  display: none;
+}
+
+#previous-address {
+  display: none;
+}
+
+#get-consent {
+  display: none;
+  float: right;
+}
+
+#your-consent {
+  display: none;
+}
+
+#info-request {
+  display: none;
+}
+
+#submit-app {
+  display: none;
+  border: 2px black solid;
+  background-color: lightsteelblue;
+  border-radius: 5px;
+  margin: 15px auto;
+  height: 35px;
+  width: 180px;
+  font-size: 20px;
+  float: right;
+}
+
+input[type="checkbox"] {
+  height: 50px;
+  width: 30px;
+  margin-top: 20px;
+  margin-left: 45px;
+}
+/** Media Queries **/
+
+@media screen and (max-width: 1100px) {
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+  .container {
+    width: 95%;
+  }
+}
+
+</style>
+  <body>
+<a href="{{request.META.HTTP_REFERER}}">back</a>
+  <div class="container">
+    <h1 class="main-header">Account Application Form.</h1>
+    <hr>
+    <form id="app-form" action="accform" method="POST">
+      {% csrf_token %}
+    <fieldset class="sub-container" id="basic-details">
+      <h2 class="sub-heading">Basic Details</h2>
+      <hr>
+<!--        <label for="dropdown" class="standard-label">-->
+<!--          Title<span class="required">*</span>-->
+<!--          <br>-->
+<!--          <select  id="dropdown" class="standard-select" required>-->
+<!--            <option value="select" disabled selected>Select Title</option>-->
+<!--            <option value="Mr">Mr</option>-->
+<!--            <option value="Mrs">Mrs</option>-->
+<!--            <option value="Miss">Miss</option>-->
+<!--            <option value="Ms">Ms</option>-->
+<!--            <option value="Dr">Dr</option>-->
+<!--            <option value="Prof">Prof</option>-->
+<!--          </select>-->
+<!--        </label>-->
+        <label for="firstname" class="standard-label">
+          First Name<span class="required">*</span>
+          <input class="standard-input" name="firstname" id="firstname" type="text" placeholder="First name..." required>
+        </label>
+<!--        <label id="middlenames" class="standard-label">-->
+<!--          Middle Names (If Applicable)-->
+<!--          <input class="standard-input" name="middlename" id="middlename" type="text" placeholder="Middle names...">-->
+<!--        </label>-->
+        <label for="lastname" class="standard-label">
+          Last Name<span class="required">*</span>
+          <input class="standard-input" name="lastname" id="lastname" type="text" placeholder="Last name..." required>
+        </label>
+      <label for="DOB" class="standard-label">
+          Date of Birth<span class="required">*</span>
+          <input class="standard-input" type="date" name="DOB" id="DOB" required>
+        </label>
+      <label for="age" class="standard-label">
+          Age<span class="required">*</span>
+          <input class="standard-input" name="age" id="age" type="text" placeholder="Age" required>
+        </label>
+<!--      <label id="gender"> Select you gender</label>-->
+<!--<select name="gender">-->
+<!--	<option value="male">Male</option>-->
+<!--	<option value="female">Female</option>-->
+<!--	<option value="other">other</option>-->
+<!--</select>-->
+
+      <label for="gender" class="standard-label">
+          Gender<span class="required">*</span>
+          <br>
+          <select  id="gender" class="standard-select" required>
+            <option value="select" disabled selected>Choose Gender</option>
+            <option value="basic-current">Male</option>
+            <option value="premium-current">Female</option>
+            <option value="instant-saver">Other</option>
+          </select>
+        </label>
+        <label id="phone-number" class="standard-label">
+          Phone Number<span class="required">*</span>
+          <input class="standard-input" type="tel" id="phone" name="phone" pattern='^\+?\d{10,12}' placeholder="Example: 01925999111" required>
+        </label>
+        <label for="email-address" class="standard-label">
+          Email<span class="required">*</span>
+          <input class="standard-input" id="email-address" type="email" placeholder="Your email address..." required>
+        </label>
+      <label for="address" class="standard-label">
+          Address<span class="required">*</span>
+          <input class="standard-input" name="age" id="address" type="textarea" placeholder="Address" required>
+        </label>
+
+      <label for="district" class="standard-label">
+          District<span class="required">*</span>
+          <br>
+          <select  id="district" class="standard-select" required>
+            <option value="select" disabled selected>Choose District</option>
+            <option value="basic-current">Trivandrum</option>
+            <option value="premium-current">Kollam</option>
+            <option value="instant-saver">Pathanamthitta</option>
+            <option value="lifetime-isa">Alappuzha</option>
+            <option value="help-to-buy">Kottayam</option>
+            <option value="help-to-buy">Idukki</option>
+            <option value="help-to-buy">Ernakulam</option>
+            <option value="help-to-buy">Thrissur</option>
+            <option value="help-to-buy">Malappuram</option>
+            <option value="help-to-buy">Kozhikode</option>
+            <option value="help-to-buy">Wayanad</option>
+            <option value="help-to-buy">Kannur</option>
+            <option value="help-to-buy">Kasorgod</option>
+            <option value="help-to-buy">Palakkad</option>
+          </select>
+        </label>
+
+
+      <label for="branch" class="standard-label">
+          Branch<span class="required">*</span>
+          <br>
+          <select  id="branch" class="standard-select" required>
+            <option value="select" disabled selected>Select Branch</option>
+            <option value="basic-current">Ambalapuzha</option>
+            <option value="premium-current">Aluva</option>
+            <option value="instant-saver">Thodupuzha</option>
+            <option value="lifetime-isa">Thalassery</option>
+            <option value="help-to-buy">Vellarikundu</option>
+            <option value="help-to-buy">Kottarakkara</option>
+            <option value="help-to-buy">Changanasserry</option>
+            <option value="help-to-buy">Koyilandy</option>
+            <option value="help-to-buy">Ponnani</option>
+            <option value="help-to-buy">Pattambi</option>
+            <option value="help-to-buy">Konni</option>
+            <option value="help-to-buy">Kattakada</option>
+            <option value="help-to-buy">Chalakudy</option>
+            <option value="help-to-buy">Mananthavady</option>
+          </select>
+        </label>
+
+        <label id="accounttype" class="standard-label">
+          What type of account are you applying for?<span class="required">*</span>
+          <br>
+          <select  id="account-select" class="standard-select" required>
+            <option value="select" disabled selected>Choose Account</option>
+            <option value="basic-current">Basic Current Account</option>
+            <option value="premium-current">Premium Current Account</option>
+            <option value="instant-saver"> Savings Account</option>
+          </select>
+        </label>
+
+
+      <label for="materials" class="standard-label">
+          Materials<span class="required">*</span>
+          <br>
+          <select  id="materials" class="standard-select" required>
+            <option value="select" disabled selected>Choose matirial</option>
+            <option value="basic-current">Debit card</option>
+            <option value="premium-current">Credit Card</option>
+            <option value="instant-saver">Cheque Book</option>
+          </select>
+        </label>
+        <button type="button">
+    <a href="{% url 'message' %}">Submit</a>
+</button>
+<button type="button">
+    <a href="http://127.0.0.1:8000/">Logout</a>
+</button>
+      </fieldset>
+
+<!--      <fieldset class="sub-container" id="address-history">-->
+<!--        <h2 class="sub-heading">Address History</h2>-->
+<!--        <hr>-->
+<!--        <h3 class="small-heading">Are you currently a UK resident?</h3>-->
+<!--        <label for="yes" class="radio-label">-->
+<!--          <input class="radio-input" name="UK-res" value="yes" id="yes" type="radio">Yes</input>-->
+<!--        </label>-->
+<!--        <label for="no" class="radio-label">-->
+<!--          <input class="radio-input" name="UK-res" value="no" id="no" type="radio">No</input>-->
+<!--        </label>-->
+<!--        <p id="non-uk">We're really sorry. We currently only offer banking services to UK residents.</p>-->
+<!--        <div id="current-address">-->
+<!--          <h3 class="small-heading">Current Address</h3>-->
+<!--          <label id="line1" class="standard-label">-->
+<!--            Address line 1<span class="required">*</span>-->
+<!--            <input class="standard-input" type="text" required>-->
+<!--          </label>-->
+<!--          <label id="line2" class="standard-label">-->
+<!--            Address line 2-->
+<!--            <input class="standard-input" type="text">-->
+<!--          </label>-->
+<!--          <label id="town-city" class="standard-label">-->
+<!--            Town/City<span class="required">*</span>-->
+<!--            <input class="standard-input" type="text" required>-->
+<!--          </label>-->
+<!--          <label id="county" class="standard-label">-->
+<!--            County-->
+<!--            <input class="standard-input" type="text">-->
+<!--          </label>-->
+<!--          <label id="postcode" class="standard-label">-->
+<!--            Post Code<span class="required">*</span>-->
+<!--            <input class="standard-input" type="text" maxlength="8" required>-->
+<!--          </label>-->
+<!--          <h3 class="small-heading">Have you lived at any other address within the last 5 years?</h3>-->
+<!--          <label for="yes-prev" class="radio-label">-->
+<!--            <input class="radio-input" name="UK-res" value="yes" id="yes-prev" type="radio">Yes</input>-->
+<!--          </label>-->
+<!--          <label for="no-prev" class="radio-label">-->
+<!--            <input class="radio-input" name="UK-res" value="no" id="no-prev" type="radio">No</input>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        <div id="previous-address">-->
+<!--          <h3 class="small-heading">Previous Address</h3>-->
+<!--          <label for="line1" class="standard-label">-->
+<!--            Address line 1<span class="required">*</span>-->
+<!--            <input class="standard-input" type="text">-->
+<!--          </label>-->
+<!--          <label for="line2" class="standard-label">-->
+<!--            Address line 2-->
+<!--            <input class="standard-input" type="text">-->
+<!--          </label>-->
+<!--          <label for="town-city" class="standard-label">-->
+<!--            Town/City<span class="required">*</span>-->
+<!--            <input class="standard-input" type="text">-->
+<!--          </label>-->
+<!--          <label for="county" class="standard-label">-->
+<!--            County-->
+<!--            <input class="standard-input" type="text">-->
+<!--          </label>-->
+<!--          <label for="postcode" class="standard-label">-->
+<!--            Post Code<span class="required">*</span>-->
+<!--            <input class="standard-input" type="text" maxlength="8">-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        <button type="button" id="get-consent">Continue</button>-->
+<!--      </fieldset>-->
+
+<!--      <fieldset class="sub-container" id="your-consent">-->
+<!--        <h2 class="sub-heading">Your Consent</h2>-->
+<!--        <hr>-->
+<!--        <label class="standard-label" id="credit-search" for="credit-search">-->
+<!--          Tick the box below to allow the bank to use the details you have provided to conduct a credit search if necessary.-->
+<!--          <br>-->
+<!--        <input type="checkbox" id="credit-click" name="credit-search"><br>-->
+<!--        </label>-->
+<!--        <label class="standard-label" for="info-request" id="info-request">-->
+<!--          Tick the box below to allow the bank to contact you via email if further information is needed to progress your application.-->
+<!--          <br>-->
+<!--          <input type="checkbox" id="info-click" name="info-request"><br>-->
+<!--        </label>-->
+<!--        <input id="submit-app" type="submit" name="submit" value="Submit Application" onclick="logValues()">-->
+<!--      </fieldset>-->
+    </form>
+    {% for msg in messages %}
+                {{msg}}
+            {% endfor %}
+  </div>
+</body>
+</html>

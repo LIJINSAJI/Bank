@@ -1,0 +1,87 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">-->
+<!--    <title>voyage</title>-->
+<!--    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abhaya+Libre&amp;display=swap">-->
+<!--    <link rel="stylesheet" href="static/assets/fonts/fontawesome-all.min.css">-->
+<!--    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">-->
+<!--    <link rel="stylesheet" href="static/assets/fonts/ionicons.min.css">-->
+<!--    <link rel="stylesheet" href="static/assets/fonts/fontawesome5-overrides.min.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Dark-NavBar-1.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Dark-NavBar-2.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Dark-NavBar.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Footer-Basic.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/gradient-navbar-1.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/gradient-navbar.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Ludens-Users-&#45;&#45;25-After-Register.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Map-Clean.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Navigation-Clean.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Registration-Form-with-Photo.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/Simple-Slider.css">-->
+<!--    <link rel="stylesheet" href="static/assets/css/styles.css">-->
+<!--    <script type="text/javascript">-->
+<!--        function preventBack() {-->
+<!--            window.history.forward();-->
+<!--        }-->
+
+<!--        setTimeout("preventBack()", 0);-->
+
+<!--        window.onunload = function () { null };-->
+<!--    </script>-->
+<!--</head>-->
+
+<!--<body background="green">-->
+<!--    <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">-->
+<!--        <div class="container"><a class="navbar-brand" href="#">User Dashboard</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>-->
+<!--            <div class="collapse navbar-collapse" id="navcol-1">-->
+<!--                <ul class="navbar-nav me-auto">-->
+<!--                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="/">View Form</a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="/">Branches</a></li>-->
+<!--&lt;!&ndash;                    <li class="nav-item"><a class="nav-link" href="/book">Booking</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li class="nav-item"><a class="nav-link" href="/resort">View Resort</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li class="nav-item"><a class="nav-link" href="/packages">Choose Package</a></li>&ndash;&gt;-->
+<!--                </ul><span class="navbar-text actions"> <a class="btn btn-light action-button" role="button" href="/index">Log Out</a></span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </nav>-->
+<!--    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>-->
+<!--    <script src="static/assets/js/bs-init.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>-->
+<!--    <script src="https://geodata.solutions/includes/countrystate.js"></script>-->
+<!--    <script src="static/assets/js/Simple-Slider.js"></script>-->
+<!--</body>-->
+
+<!--</html>-->
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+<a href="{{request.META.HTTP_REFERER}}">Logout</a>
+<form action="" method="post">
+    {% csrf_token %}
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="/accform">
+    State Bank of India
+  </a>
+</nav>
+<button type="button">
+    <a href="{% url 'accform' %}">Click here!</a>
+</button>
+<!--<button type="button" class="btn btn-secondary"><a href="accform.html">Account Form</a></button>-->
+    </form>
+</body>
+</html>
+
